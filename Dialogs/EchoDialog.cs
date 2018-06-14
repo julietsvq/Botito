@@ -3,7 +3,6 @@ using System.Threading.Tasks;
 using Microsoft.Bot.Connector;
 using Microsoft.Bot.Builder.Dialogs;
 using System.Net.Http;
-using SimpleEchoBot;
 
 namespace Microsoft.Bot.Sample.SimpleEchoBot
 {
@@ -32,10 +31,8 @@ namespace Microsoft.Bot.Sample.SimpleEchoBot
             }
             else
             {
-                //message.Speak = SSMLHelper.Speak($"Hi, my name is Botito. You said: {message.Text}");
-                //await context.PostAsync(message);
-                await context.SayAsync(text: $"Hi, my name is Botito. You said: {message.Text}", speak: $"Hi, my name is Botito. You said: {message.Text}");
-                //await context.PostAsync($"{this.count++}: You said {message.Text}");               
+                var messageText = message.Text;
+                await context.SayAsync(text: $"Hi, my name is Botito. You said: {messageText}", speak: $"Hi, my name is Botito. You said: {messageText}");
                 context.Wait(MessageReceivedAsync);
             }
         }
