@@ -34,7 +34,8 @@ namespace Microsoft.Bot.Sample.SimpleEchoBot
             {
                 //message.Speak = SSMLHelper.Speak($"Hi, my name is Botito. You said: {message.Text}");
                 //await context.PostAsync(message);
-                await context.PostAsync($"{this.count++}: You said {message.Text}");               
+                await context.SayAsync(text: $"Hi, my name is Botito. You said: {message.Text}", speak: $"Hi, my name is Botito. You said: {message.Text}");
+                //await context.PostAsync($"{this.count++}: You said {message.Text}");               
                 context.Wait(MessageReceivedAsync);
             }
         }
