@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using Microsoft.Bot.Connector;
 using Microsoft.Bot.Builder.Dialogs;
 using System.Net.Http;
-
+using SimpleEchoBot;
 
 namespace Microsoft.Bot.Sample.SimpleEchoBot
 {
@@ -11,13 +11,10 @@ namespace Microsoft.Bot.Sample.SimpleEchoBot
     public class EchoDialog : IDialog<object>
     {
         protected int count = 1;
-        var message;
 
-        
         public async Task StartAsync(IDialogContext context)
         {
             context.Wait(MessageReceivedAsync);
-            message = context.MakeMessage();
         }
 
         public async Task MessageReceivedAsync(IDialogContext context, IAwaitable<IMessageActivity> argument)
@@ -35,8 +32,7 @@ namespace Microsoft.Bot.Sample.SimpleEchoBot
             }
             else
             {
-                var message = context.MakeMessage();
-                message.Speak = SSMLHelper.Speak("Hi, my name is Botito. You said: {message.Text}");
+                message.Speak = SSMLHelper.Speak($"Hi, my name is Botito. You said: {message.Text}");
                 await context.PostAsync(message);
                 //await context.PostAsync($"{this.count++}: You said {message.Text}");               
                 context.Wait(MessageReceivedAsync);
@@ -57,6 +53,5 @@ namespace Microsoft.Bot.Sample.SimpleEchoBot
             }
             context.Wait(MessageReceivedAsync);
         }
-
     }
 }
